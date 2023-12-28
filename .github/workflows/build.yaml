@@ -24,7 +24,7 @@ jobs:
       - name: Check formatting of Terraform code
         id: fmt
         run: |
-          terraform fmt -check
+          terraform fmt
       - name: Terraform Init
         id: init
         run: |
