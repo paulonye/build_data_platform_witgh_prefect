@@ -59,6 +59,14 @@ jobs:
         uses: hashicorp/setup-terraform@v2.0.0
         with:
           terraform_version: $TERRAFORM_VERSION
+      - name: Setup terraform variables
+        id: vars
+        run: |
+          cat > pipeline.auto.tfvars <<EOF
+          prefect_account_id="${{ vars.PREFECT_ACCOUNT_ID }}" 
+          prefect_workspace_id="${{ vars.PREFECT_WORKSPACE_ID }}" 
+          prefect_api_key="${{ vars.PREFECT_API_KEY }}"
+          EOF
       - name: Check formatting of Terraform code
         id: fmt
         run: |
