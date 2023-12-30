@@ -16,17 +16,14 @@ variable "repo_id" {
 
 variable "prefect_workspace_id" {
   description = "Workspace id of the Prefect Account"
-  default     = "853697d1-0a7b-4531-bb9e-099475f0dd3f"
 }
 
 variable "prefect_api_key" {
   description = "Api key that gives access to Prefect Account"
-  default     = "pnu_0bWwwVKkReDIY6b2LdX4PUKWUbSVKW4bOKGq"
 }
 
 variable "prefect_account_id" {
   description = "Account id of your Prefect Account"
-  default     = "1e75118d-08d5-4d97-9250-670641adb003"
 }
 
 variable "base_job_template" {
