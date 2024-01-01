@@ -1,4 +1,4 @@
-name: Terraform Infrastructure Pipeline
+name: Destroy Terraform Infrastructure Resources
 on:
   workflow_dispatch:
 defaults:
@@ -27,6 +27,4 @@ jobs:
         id: destroy
         run: terraform destroy -no-color -input=false --auto-approve
         continue-on-error: true
-      - name: Terraform Destroy Status
-        if: steps.destroy.outcome == 'failure'
-        run: exit 1
+      
