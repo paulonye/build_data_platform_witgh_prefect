@@ -23,8 +23,12 @@ jobs:
           prefect_workspace_id="${{ vars.PREFECT_WORKSPACE_ID }}" 
           prefect_api_key="${{ vars.PREFECT_API_KEY }}"
           EOF
+      - name: Terraform Init
+        id: init
+        run: |
+          terraform init
       - name: Terraform Destroy
         id: destroy
         run: terraform destroy -no-color -input=false --auto-approve
-        continue-on-error: true
+        continue-on-error: false
       
