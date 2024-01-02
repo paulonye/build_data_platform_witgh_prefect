@@ -19,9 +19,9 @@ jobs:
         id: vars
         run: |
           cat > pipeline.auto.tfvars <<EOF
-          prefect_account_id="${{ vars.PREFECT_ACCOUNT_ID }}" 
-          prefect_workspace_id="${{ vars.PREFECT_WORKSPACE_ID }}" 
-          prefect_api_key="${{ vars.PREFECT_API_KEY }}"
+          prefect_account_id="${{ secrets.PREFECT_ACCOUNT_ID }}" 
+          prefect_workspace_id="${{ secrets.PREFECT_WORKSPACE_ID }}" 
+          prefect_api_key="${{ secrets.PREFECT_API_KEY }}"
           EOF
       - name: Terraform Init
         id: init
