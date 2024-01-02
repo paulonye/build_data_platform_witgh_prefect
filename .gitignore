@@ -1,6 +1,11 @@
 # Python virtual environmebt
 env/
 .DS_Store
+*__pycache__/
+
+# Prefect Files
+.prefectignore
+.prefect/
 
 # keys
 key.json
