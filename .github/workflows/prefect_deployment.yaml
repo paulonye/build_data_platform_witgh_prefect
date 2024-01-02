@@ -26,7 +26,7 @@ jobs:
       - name: Prefect Cloud login
         run: |
           prefect config set PREFECT_API_KEY=${{ env.PREFECT_API_KEY }} 
-          prefect config set PREFECT_API_URL="https://api.prefect.cloud/api/accounts/${{ env.PREFECT_ACCOUNT_ID }}/workspaces/{{ env.PREFECT_WORKSPACE_ID }}"
+          prefect config set PREFECT_API_URL="https://api.prefect.cloud/api/accounts/${{ env.PREFECT_ACCOUNT_ID }}/workspaces/${{ env.PREFECT_WORKSPACE_ID }}"
 
       - name: Deploy flows to Prefect Cloud
         id: deploy
