@@ -7,28 +7,46 @@ name: build_data_platform_with_prefect
 prefect-version: 2.14.12
 
 # build section allows you to manage and build docker images
-build: null
+build:
 
 # push section allows you to manage if and how this project is uploaded to remote locations
-push: null
+push:
 
 # pull section allows you to provide instructions for cloning this project in remote locations
 pull:
 - prefect.deployments.steps.git_clone:
     repository: https://github.com/paulonye/build_data_platform_witgh_prefect.git
     branch: main
-    access_token: "{{ prefect.blocks.secret.github-creds }}"
+    access_token: '{{ prefect.blocks.secret.github-creds }}'
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
 - name: cloud-run-jobs
-  version: null
+  version:
   tags: []
   description: Flows that will run in GCP environment
   schedule: {}
   entrypoint: jobs/run_transactions_job.py:etl_gcs_to_bq
-  parameters: {"name_of_file": "transactions"}
+  parameters: {name_of_file: transactions}
   work_pool:
     name: cloud-run-job-infra
     work_queue_name: dev
 
+- name: aws-ecs-tasks
+  version:
+  tags: []
+  description: Flows that will run in AWS environment
+  schedule:
+  entrypoint: jobs/run_transactions_job.py:etl_gcs_to_bq
+  parameters:
+    name_of_file: transactions
+  work_pool:
+    name: aws-ecs-infra
+    work_queue_name: dev
+    job_variables: {"execution_role_arn": "arn:aws:iam::790198870643:role/prefectflows-execution-task-role",
+                "task_role_arn": "arn:aws:iam::790198870643:role/prefectflows-execution-task-role",
+                "cluster": "arn:aws:ecr:us-east-1:790198870643:repository/prefectflows-prod-ecr",
+                "vpc_id": "vpc-076393441be20b426",
+                "container_name": prefectflows-prod-ecr,
+                "family": "prefectflows",}
+    image: "790198870643.dkr.ecr.us-east-1.amazonaws.com/prefectflows-prod-ecr/run-prefect-job:latest"

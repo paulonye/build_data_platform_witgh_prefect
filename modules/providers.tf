@@ -8,6 +8,10 @@ terraform {
       source  = "PrefectHQ/prefect"
       version = "0.1.1"
     }
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.31.0"
+    }
   }
   backend "gcs" {
     bucket = "terraform-state-pb"
@@ -22,4 +26,10 @@ provider "google" {
 provider "prefect" {
   api_key    = var.prefect_api_key
   account_id = var.prefect_account_id
+}
+
+provider "aws" {
+  region     = var.aws_region
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }
