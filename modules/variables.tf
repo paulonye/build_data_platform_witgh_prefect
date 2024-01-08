@@ -59,7 +59,7 @@ variable "public_subnet" {
 
 variable "app_name" {
   description = "Name of applicatioN"
-  default     = "prefectflows"
+  default     = "run-prefect-job"
 }
 
 variable "app_environment" {

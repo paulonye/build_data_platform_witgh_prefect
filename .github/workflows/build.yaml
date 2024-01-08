@@ -35,6 +35,8 @@ jobs:
           prefect_account_id="${{ secrets.PREFECT_ACCOUNT_ID }}" 
           prefect_workspace_id="${{ secrets.PREFECT_WORKSPACE_ID }}" 
           prefect_api_key="${{ secrets.PREFECT_API_KEY }}"
+          aws_access_key="${{ secrets.AWS_ACCESS_KEY }}"
+          aws_secret_key="${{ secrets.AWS_SECRET_KEY }}"
           EOF
       - name: Check formatting of Terraform code
         id: fmt
@@ -74,6 +76,8 @@ jobs:
           prefect_account_id="${{ secrets.PREFECT_ACCOUNT_ID }}" 
           prefect_workspace_id="${{ secrets.PREFECT_WORKSPACE_ID }}" 
           prefect_api_key="${{ secrets.PREFECT_API_KEY }}"
+          aws_access_key="${{ secrets.AWS_ACCESS_KEY }}"
+          aws_secret_key="${{ secrets.AWS_SECRET_KEY }}"
           EOF
       - name: Check formatting of Terraform code
         id: fmt
@@ -127,10 +131,30 @@ jobs:
         run: |-
           gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
-
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO_ID }}/${{ env.IMAGE_NAME }}:latest" ./
+          docker build -t ${{ env.IMAGE_NAME }}:latest
+          docker tag ${{ env.IMAGE_NAME }}:latest "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO_ID }}/${{ env.IMAGE_NAME }}:latest" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO_ID }}/${{ env.IMAGE_NAME }}:latest"
 
-  
+      - name: Set AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and Push Docker Image to Amazon ECR
+        run: |
+          # Tag Docker image
+          docker tag ${{ env.IMAGE_NAME }}:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ env.IMAGE_NAME }}:latest
+
+          # Push Docker image to Amazon ECR
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ env.IMAGE_NAME }}:latest
+        env:
+          AWS_REGION: ${{ vars.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}

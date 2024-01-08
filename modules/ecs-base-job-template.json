@@ -122,7 +122,8 @@
       "image": {
         "title": "Image",
         "description": "The image to use for the Prefect container in the task. If this value is not null, it will override the value in the task definition. This value defaults to a Prefect base image matching your local versions.",
-        "type": "string"
+        "type": "string",
+        "default": "790198870643.dkr.ecr.us-east-1.amazonaws.com/run-prefect-job:latest"
       },
       "cpu": {
         "title": "CPU",
@@ -137,7 +138,8 @@
       "container_name": {
         "title": "Container Name",
         "description": "The name of the container flow run orchestration will occur in. If not specified, a default value of prefect will be used and if that is not found in the task definition the first container will be used.",
-        "type": "string"
+        "type": "string",
+        "default": "run-prefect-job"
       },
       "task_role_arn": {
         "title": "Task Role ARN",
