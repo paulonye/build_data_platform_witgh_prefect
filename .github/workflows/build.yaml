@@ -35,6 +35,8 @@ jobs:
           prefect_account_id="${{ secrets.PREFECT_ACCOUNT_ID }}" 
           prefect_workspace_id="${{ secrets.PREFECT_WORKSPACE_ID }}" 
           prefect_api_key="${{ secrets.PREFECT_API_KEY }}"
+          aws_access_key="${{ secrets.AWS_ACCESS_KEY }}"
+          aws_secret_key="${{ secrets.AWS_SECRET_KEY }}"
           EOF
       - name: Check formatting of Terraform code
         id: fmt
