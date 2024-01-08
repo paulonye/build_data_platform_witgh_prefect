@@ -134,7 +134,11 @@ jobs:
       - name: Build and Push Container
         run: |-
           docker build -t ${{ env.IMAGE_NAME }}:latest ./
-          docker tag "${{ env.IMAGE_NAME }}:latest" "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO_ID }}/${{ env.IMAGE_NAME }}:latest" /
+
+          docker images/
+
+          docker tag "${{ env.IMAGE_NAME }}:latest" "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO_ID }}/${{ env.IMAGE_NAME }}:latest"/
+
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO_ID }}/${{ env.IMAGE_NAME }}:latest"
 
       - name: Set AWS Credentials
