@@ -56,7 +56,7 @@ To methodically build a scalable and modular data platform using Prefect, we can
 ### Working on Transformation Logic:
 1) Define Tasks:
     - Clearly outline the tasks that need to be executed within the data platform.
-    
+
 2) Prefect Blocks Integration:
     - Incorporate Prefect blocks for specific tasks, such as reading data from cloud storage buckets.
     - Implement Prefect blocks for securely handling and accessing secrets.
@@ -102,7 +102,7 @@ By systematically addressing each of these steps, we can establish a scalable an
 
 The diagram below shows the project architecture explaining key concepts of all components involved.
 
-![architecure diagran](./content/project_architeture.png)
+![architecure diagram](./content/project_architecture.png)
 
 The digram above covers all steps to get the infrastructure up and running, deploy the prefect flows and then submit a job for executution.
 
