@@ -1,0 +1,34 @@
+name: Destroy Terraform Infrastructure Resources
+on:
+  workflow_dispatch:
+defaults:
+  run:
+    working-directory: modules/
+env:
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS_KEY}}
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2.0.0
+        with:
+          terraform_version: $TERRAFORM_VERSION
+      - name: Setup terraform variables for destroy
+        id: vars
+        run: |
+          cat > pipeline.auto.tfvars <<EOF
+          prefect_account_id="${{ secrets.PREFECT_ACCOUNT_ID }}" 
+          prefect_workspace_id="${{ secrets.PREFECT_WORKSPACE_ID }}" 
+          prefect_api_key="${{ secrets.PREFECT_API_KEY }}"
+          EOF
+      - name: Terraform Init
+        id: init
+        run: |
+          terraform init
+      - name: Terraform Destroy
+        id: destroy
+        run: terraform destroy -no-color -input=false --auto-approve
+        continue-on-error: false
+      
