@@ -122,7 +122,8 @@
       "image": {
         "title": "Image",
         "description": "The image to use for the Prefect container in the task. If this value is not null, it will override the value in the task definition. This value defaults to a Prefect base image matching your local versions.",
-        "type": "string"
+        "type": "string",
+        "default": "790198870643.dkr.ecr.us-east-1.amazonaws.com/run-prefect-job:latest"
       },
       "cpu": {
         "title": "CPU",
