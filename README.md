@@ -102,7 +102,7 @@ By systematically addressing each of these steps, we can establish a scalable an
 
 The diagram below shows the project architecture explaining key concepts of all components involved.
 
-![architecure diagram](./content/project_architecture.png)
+![architecure_diagram](./content/project_architecture.png)
 
 The digram above covers all steps to get the infrastructure up and running, deploy the prefect flows and then submit a job for executution.
 
