@@ -15,7 +15,7 @@ env:
   GAR_REPO_ID: ${{ vars.GAR_REPO_ID }}
   IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
   REGION: ${{ vars.GCP_REGION }}
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
   AWS_REGION: ${{ vars.AWS_REGION }}
   AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
@@ -143,11 +143,11 @@ jobs:
 
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPO_ID }}/${{ env.IMAGE_NAME }}:latest"
 
-      - name: Set AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
