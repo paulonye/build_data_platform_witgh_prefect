@@ -82,7 +82,34 @@ data "aws_iam_policy_document" "assume_role_policy" {
 
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   role       = aws_iam_role.ecsTaskExecutionRole.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+# Task Definition
+resource "aws_ecs_task_definition" "task" {
+  family                   = var.app_name # Name your task
+  container_definitions    = <<DEFINITION
+  [
+    {
+      "name": "${var.app_name}",
+      "image": "${aws_ecr_repository.aws-ecr.repository_url}",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "hostPort": 5000
+        }
+      ],
+      "memory": 1024,
+      "cpu": 1024
+    }
+  ]
+  DEFINITION
+  requires_compatibilities = ["FARGATE"] # use Fargate as the launch type
+  network_mode             = "awsvpc"    # add the AWS VPN network mode as this is required for Fargate
+  memory                   = 1024        # Specify the memory the container requires
+  cpu                      = 1024         # Specify the CPU the container requires
+  execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
 }
 
 # Cluster

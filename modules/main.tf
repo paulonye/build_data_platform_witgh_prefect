@@ -20,7 +20,7 @@ module "aws" {
   source             = "./aws"
   app_name           = var.app_name
   app_environment    = var.app_environment
-  public_subnet     = var.public_subnet
+  public_subnet      = var.public_subnet
   availability_zones = var.availability_zones
   aws_region         = var.aws_region
   aws_access_key     = var.aws_access_key
@@ -34,6 +34,11 @@ output "vpc_id" {
 output "ecs_cluster_arn" {
   value = module.aws.ecs_cluster_arn
 }
+
+output "task_definition_arn" {
+  value = module.aws.task_definition_arn
+}
+
 
 output "iam_taskexecution_role_arn" {
   value = module.aws.iam_taskexecution_role_arn
