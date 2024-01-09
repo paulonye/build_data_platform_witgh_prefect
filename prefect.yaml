@@ -43,10 +43,9 @@ deployments:
   work_pool:
     name: aws-ecs-infra
     work_queue_name: dev
-    job_variables: {"execution_role_arn": "arn:aws:iam::790198870643:role/prefectflows-execution-task-role",
-                "task_role_arn": "arn:aws:iam::790198870643:role/prefectflows-execution-task-role",
-                "cluster": "arn:aws:ecr:us-east-1:790198870643:repository/prefectflows-prod-ecr",
+    job_variables: {"execution_role_arn": "arn:aws:iam::790198870643:role/run-prefect-job-execution-task-role",
+                "cluster": "arn:aws:ecr:us-east-1:790198870643:repository/run-prefect-job",
                 "vpc_id": "vpc-076393441be20b426",
-                "container_name": prefectflows-prod-ecr,
+                "container_name": run-prefect-job,
                 "family": "prefectflows",}
-    image: "790198870643.dkr.ecr.us-east-1.amazonaws.com/prefectflows-prod-ecr/run-prefect-job:latest"
+    image: "790198870643.dkr.ecr.us-east-1.amazonaws.com/run-prefect-job:latest"
