@@ -35,15 +35,15 @@ variable "base_job_template" {
 variable "workpool_name" {
   description = "Name given to the workpool"
   #default     = "cloud-run-job-infra"
-  default     = "aws-ecs-infra"
-  type        = string
+  default = "aws-ecs-infra"
+  type    = string
 }
 
 variable "workpool_type" {
   description = "The Workpool type"
   #default     = "cloud-run:push"
-  default     = "ecs:push"
-  type        = string
+  default = "ecs:push"
+  type    = string
 }
 
 variable "workpool_status" {
