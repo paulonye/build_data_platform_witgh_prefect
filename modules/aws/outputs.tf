@@ -17,3 +17,7 @@ output "ecr_repo_url" {
 output "ecr_repo_name" {
   value = aws_ecr_repository.aws-ecr.name
 }
+
+output "task_definition_arn" {
+    value = aws_ecs_task_definition.task.arn
+}
