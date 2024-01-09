@@ -52,7 +52,7 @@ resource "aws_route_table_association" "public" {
 
 # Elastic Container Repository
 resource "aws_ecr_repository" "aws-ecr" {
-  name = "${var.app_name}"
+  name = var.app_name
   tags = {
     Name        = "${var.app_name}-ecr"
     Environment = var.app_environment
@@ -100,16 +100,16 @@ resource "aws_ecs_task_definition" "task" {
           "hostPort": 5000
         }
       ],
-      "memory": 2,
-      "cpu": 1024
+      "cpu": 1024,
+      "memory": 2048
     }
   ]
   DEFINITION
   requires_compatibilities = ["FARGATE"] # use Fargate as the launch type
   network_mode             = "awsvpc"    # add the AWS VPN network mode as this is required for Fargate
-  memory                   = 2        # Specify the memory the container requires
-  cpu                      = 1024         # Specify the CPU the container requires
-  execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
+  cpu                      = 1024
+  memory                   = 2048
+  execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
 
 # Cluster
