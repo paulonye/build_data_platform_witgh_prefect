@@ -3,7 +3,7 @@ output "vpc_id" {
 }
 
 output "ecs_cluster_arn" {
-  value = aws_ecr_repository.aws-ecr.arn
+  value = aws_ecs_cluster.aws-ecs-cluster.arn
 }
 
 output "iam_taskexecution_role_arn" {
