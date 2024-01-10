@@ -31,4 +31,4 @@ jobs:
       - name: Deploy flows to Prefect Cloud
         id: deploy
         run: |
-          prefect --no-prompt deploy
+          prefect --no-prompt deploy --all
