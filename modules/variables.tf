@@ -26,7 +26,13 @@ variable "prefect_account_id" {
   description = "Account id of your Prefect Account"
 }
 
-variable "base_job_template" {
+variable "gcp_base_job_template" {
+  description = "Json configuration file for workpool"
+  default     = "./ecs-base-job-template.json"
+  type        = string
+}
+
+variable "aws_base_job_template" {
   description = "Json configuration file for workpool"
   default     = "./ecs-base-job-template.json"
   type        = string
