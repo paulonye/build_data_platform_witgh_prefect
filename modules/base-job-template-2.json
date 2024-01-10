@@ -44,8 +44,8 @@
                         "memory": "512Mi"
                       },
                       "requests": {
-                        "cpu": "{{ cpu }}",
-                        "memory": "{{ memory }}"
+                        "cpu": "1000m",
+                        "memory": "512Mi"
                       }
                     }
                   }
