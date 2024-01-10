@@ -27,7 +27,11 @@ deployments:
   description: Flows that will run in GCP environment
   schedule: {}
   entrypoint: jobs/run_transactions_job.py:etl_gcs_to_bq
-  parameters: {name_of_file: transactions}
+  parameters:
+    name_of_file: transactions
+    bucket_name: test-folder-pipeline
+    gcp_project_id: chrome-epigram-386922
+    destination_table: dezoomcamp.transactions
   work_pool:
     name: cloud-run-job-infra
     work_queue_name: dev
@@ -40,12 +44,9 @@ deployments:
   entrypoint: jobs/run_transactions_job.py:etl_gcs_to_bq
   parameters:
     name_of_file: transactions
+    bucket_name: test-folder-pipeline
+    gcp_project_id: chrome-epigram-386922
+    destination_table: dezoomcamp.transactions
   work_pool:
     name: aws-ecs-infra
     work_queue_name: dev
-    job_variables: {"execution_role_arn": "arn:aws:iam::790198870643:role/run-prefect-job-execution-task-role",
-                "cluster": "arn:aws:ecr:us-east-1:790198870643:repository/run-prefect-job",
-                "vpc_id": "vpc-076393441be20b426",
-                "container_name": run-prefect-job,
-                "family": "prefectflows",}
-    image: "790198870643.dkr.ecr.us-east-1.amazonaws.com/run-prefect-job:latest"

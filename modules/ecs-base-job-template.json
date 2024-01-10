@@ -81,7 +81,8 @@
       "task_definition_arn": {
         "title": "Task Definition Arn",
         "description": "An identifier for an existing task definition to use. If set, options that require changes to the task definition will be ignored. All contents of the task definition in the job configuration will be ignored.",
-        "type": "string"
+        "type": "string",
+        "default": "arn:aws:ecs:us-east-1:790198870643:task-definition/run-prefect-job:1"
       },
       "aws_credentials": {
         "title": "AWS Credentials",
@@ -100,7 +101,8 @@
       "cluster": {
         "title": "Cluster",
         "description": "The ECS cluster to run the task in. An ARN or name may be provided. If not provided, the default cluster will be used.",
-        "type": "string"
+        "type": "string",
+        "default": "arn:aws:ecs:us-east-1:790198870643:cluster/run-prefect-job-prod-cluster"
       },
       "family": {
         "title": "Family",
@@ -154,7 +156,8 @@
       "vpc_id": {
         "title": "VPC ID",
         "description": "The AWS VPC to link the task run to. This is only applicable when using the 'awsvpc' network mode for your task. FARGATE tasks require this network  mode, but for EC2 tasks the default network mode is 'bridge'. If using the 'awsvpc' network mode and this field is null, your default VPC will be used. If no default VPC can be found, the task run will fail.",
-        "type": "string"
+        "type": "string",
+        "default": "vpc-076393441be20b426"
       },
       "configure_cloudwatch_logs": {
         "title": "Configure Cloudwatch Logs",
