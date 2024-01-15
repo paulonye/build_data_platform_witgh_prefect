@@ -107,7 +107,7 @@
         "description": "The image to use for a new Cloud Run Job. If not set, the latest Prefect image will be used. See https://cloud.google.com/run/docs/deploying#images.",
         "example": "docker.io/prefecthq/prefect:2-latest",
         "type": "string",
-        "default": "us-east1-docker.pkg.dev/chrome-epigram-386922/prefect-repository/run-prefect-job:latest"
+        "default": "${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_ID}/${IMAGE_NAME}:${TAG}"
       },
       "cpu": {
         "title": "CPU",

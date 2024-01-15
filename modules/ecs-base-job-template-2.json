@@ -82,7 +82,7 @@
         "title": "Task Definition Arn",
         "description": "An identifier for an existing task definition to use. If set, options that require changes to the task definition will be ignored. All contents of the task definition in the job configuration will be ignored.",
         "type": "string",
-        "default": "arn:aws:ecs:us-east-1:790198870643:task-definition/run-prefect-job:1"
+        "default": "${TASK_DEFNITION_ARN}"
       },
       "aws_credentials": {
         "title": "AWS Credentials",
@@ -102,7 +102,7 @@
         "title": "Cluster",
         "description": "The ECS cluster to run the task in. An ARN or name may be provided. If not provided, the default cluster will be used.",
         "type": "string",
-        "default": "arn:aws:ecs:us-east-1:790198870643:cluster/run-prefect-job-prod-cluster"
+        "default": "${CLUSTER_ARN}"
       },
       "family": {
         "title": "Family",
@@ -125,7 +125,7 @@
         "title": "Image",
         "description": "The image to use for the Prefect container in the task. If this value is not null, it will override the value in the task definition. This value defaults to a Prefect base image matching your local versions.",
         "type": "string",
-        "default": "790198870643.dkr.ecr.us-east-1.amazonaws.com/run-prefect-job:latest"
+        "default": "${REPO_URL}:${TAG}"
       },
       "cpu": {
         "title": "CPU",
@@ -141,7 +141,7 @@
         "title": "Container Name",
         "description": "The name of the container flow run orchestration will occur in. If not specified, a default value of prefect will be used and if that is not found in the task definition the first container will be used.",
         "type": "string",
-        "default": "run-prefect-job"
+        "default": "${REPO_NAME}"
       },
       "task_role_arn": {
         "title": "Task Role ARN",
@@ -157,7 +157,7 @@
         "title": "VPC ID",
         "description": "The AWS VPC to link the task run to. This is only applicable when using the 'awsvpc' network mode for your task. FARGATE tasks require this network  mode, but for EC2 tasks the default network mode is 'bridge'. If using the 'awsvpc' network mode and this field is null, your default VPC will be used. If no default VPC can be found, the task run will fail.",
         "type": "string",
-        "default": "vpc-076393441be20b426"
+        "default": "${VPC_ID}"
       },
       "configure_cloudwatch_logs": {
         "title": "Configure Cloudwatch Logs",

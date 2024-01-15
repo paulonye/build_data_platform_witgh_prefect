@@ -1,15 +1,15 @@
-variable "project" {
+variable "gcp_project" {
   type        = string
   default     = "chrome-epigram-386922"
   description = "The Gcp Project Id"
 }
 
-variable "region" {
+variable "gcp_region" {
   type    = string
   default = "us-east1"
 }
 
-variable "repo_id" {
+variable "gcp_repo_id" {
   type    = string
   default = "prefect-repository"
 }
@@ -28,7 +28,7 @@ variable "prefect_account_id" {
 
 variable "gcp_base_job_template" {
   description = "Json configuration file for workpool"
-  default     = "./ecs-base-job-template.json"
+  default     = "./base-job-template.json"
   type        = string
 }
 

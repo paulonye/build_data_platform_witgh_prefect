@@ -1,12 +1,12 @@
 variable "project" {
-  type = string
+  type        = string
   description = "The Gcp Project Id"
 }
 
 variable "region" {
-    type = string 
+  type = string
 }
 
 variable "repo_id" {
-    type = string 
+  type = string
 }
