@@ -1,4 +1,4 @@
-resource "prefect_work_pool" "example" {
+resource "prefect_work_pool" "workpool" {
   name              = var.workpool_name
   type              = var.workpool_type
   paused            = var.workpool_status
