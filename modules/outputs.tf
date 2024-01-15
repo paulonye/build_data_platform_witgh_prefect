@@ -1,24 +1,32 @@
-output "vpc_id" {
-  value = module.aws.vpc_id
+output "aws_vpc_id" {
+  value = module.aws.aws_vpc_id
 }
 
-output "ecs_cluster_arn" {
-  value = module.aws.ecs_cluster_arn
+output "aws_ecs_cluster_arn" {
+  value = module.aws.aws_ecs_cluster_arn
 }
 
-output "task_definition_arn" {
-  value = module.aws.task_definition_arn
+output "aws_task_definition_arn" {
+  value = module.aws.aws_task_definition_arn
 }
 
 
-output "iam_taskexecution_role_arn" {
-  value = module.aws.iam_taskexecution_role_arn
+output "aws_iam_taskexecution_role_arn" {
+  value = module.aws.aws_iam_taskexecution_role_arn
 }
 
-output "ecr_repo_url" {
-  value = module.aws.ecr_repo_url
+output "aws_ecr_repo_url" {
+  value = module.aws.aws_ecr_repo_url
 }
 
-output "ecr_repo_name" {
-  value = module.aws.ecr_repo_name
+output "aws_ecr_repo_name" {
+  value = module.aws.aws_ecr_repo_name
+}
+
+output "gcp_repo_id" {
+  value = module.gcp.gcp_repo_id
+}
+
+output "gcp_repo_name" {
+  value = module.gcp.gcp_repo_name
 }
